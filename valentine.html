@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Will You Be My Valentine?</title>
+
+<style>
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+/* 🌸 SIDE IMAGE CONTAINERS */
+.side-column {
+  position: fixed;
+  top: 0;
+  width: 30vw;
+  height: 100vh;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.side-left { left: 0; }
+.side-right { right: 0; }
+
+/* 🌸 INDIVIDUAL IMAGES */
+.side-image {
+  position: relative;
+  width: 100%;
+  height: 25vh;
+  background-size: cover;
+  background-position: center;
+  filter: blur(2px);
+  transform: scale(1.03);
+}
+
+/* 🌑 VIGNETTE OVERLAY */
+.side-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0,0,0,0) 45%,
+    rgba(0,0,0,0.4) 100%
+  );
+}
+
+/* LEFT SIDE IMAGES */
+.side-left .img1 { background-image: url("side1.jpeg"); }
+.side-left .img2 { background-image: url("side2.jpeg"); }
+.side-left .img3 { background-image: url("side3.jpeg"); }
+.side-left .img4 { background-image: url("side4.jpeg"); }
+
+/* RIGHT SIDE IMAGES */
+.side-right .img1 { background-image: url("side4.jpeg"); }
+.side-right .img2 { background-image: url("side3.jpeg"); }
+.side-right .img3 { background-image: url("side2.jpeg"); }
+.side-right .img4 { background-image: url("side1.jpeg"); }
+
+/* CENTER */
+.center {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* CARD */
+.card {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  max-width: 420px;
+}
+
+/* LETTER */
+.letter {
+  display: none;
+  width: 760px;
+  max-width: 92vw;
+  background: linear-gradient(135deg, #2b0a0a, #4a1c1c);
+  color: white;
+}
+
+h1 { color: #ff4d6d; }
+h2 { color: #ffb3c6; }
+
+p {
+  font-size: 18px;
+  line-height: 1.8;
+  white-space: pre-line;
+  background: rgba(0,0,0,0.45);
+  padding: 25px;
+  border-radius: 15px;
+  margin-top: 20px;
+}
+
+/* BUTTONS */
+button {
+  padding: 12px 24px;
+  font-size: 18px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+#yesBtn {
+  background: #ff4d6d;
+  color: white;
+}
+
+#noBtn {
+  background: #ccc;
+  position: absolute;
+}
+
+/* 💖 FALLING EMOJIS */
+.fall {
+  position: fixed;
+  top: -80px;
+  font-size: 56px;
+  animation: fall linear;
+  z-index: 10;
+  pointer-events: none;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-80px); }
+  100% { transform: translateY(110vh); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🌸 LEFT SIDE -->
+<div class="side-column side-left">
+  <div class="side-image img1"></div>
+  <div class="side-image img2"></div>
+  <div class="side-image img3"></div>
+  <div class="side-image img4"></div>
+</div>
+
+<!-- 🌸 RIGHT SIDE -->
+<div class="side-column side-right">
+  <div class="side-image img1"></div>
+  <div class="side-image img2"></div>
+  <div class="side-image img3"></div>
+  <div class="side-image img4"></div>
+</div>
+
+<div class="center">
+
+  <!-- QUESTION -->
+  <div class="card" id="question">
+    <h1>Will you be my Valentine? 💖</h1>
+    <button id="yesBtn">Yes 💘</button>
+    <button id="noBtn">No 🙃</button>
+  </div>
+
+  <!-- LETTER -->
+  <div class="card letter" id="letter">
+    <h2>To My SAMMMMMM 💌</h2>
+    <p>
+Heyyyy Sammmuuu
+
+Sooo,i just want to thank you for being in my life and thank you for being you.
+I LOVEEE you sooo soooo much,you make me happy without even trying,you keep me happy by just being there
+your presence makes me smile and your ABSENCE MAKES ME CRYYY!!!! sooo don't ever make me cryyyy.
+you not only have the PRETTIEST FACEEEE you also have the PRETTIEST SOUL i've ever seen.
+I dont care who leaves me but please not YOUUUUU and in just a few months you mean so much to meee
+that must be because of your magicals powers hehehehe.TO THE WORLD YOU MAYBE ONE PERSON BUT FOR ME YOU AREE
+THE WORLDDD!!!.whenever i see your photos i wish i could pull you out of it and HUG YOUUU TIGHTLY.
+EVERYTHING IS BETTER WITH YOU,EVERYTHING HAS BEEN BETTER SINCE YOUUU.
+A PIECE OF MY HEART IS ALWAYS BEATING FOR YOU EVER SINCE WE MET(maybe not biologically).
+I HOPE WE GET THE FUTURE WE ALWAYS TALK ABOUT!!!.
+I LOVE YOU IN EVERYY UNIVERSEEEE!!!
+MWAUHHHHHHHHHHHHHH
+
+Will you be mine this Valentine’s Day and many more to come? ❤️
+    </p>
+  </div>
+
+</div>
+
+<!-- 🎵 BACKGROUND MUSIC -->
+<audio id="bgMusic" preload="auto">
+  <source src="music/valentine.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const question = document.getElementById("question");
+const letter = document.getElementById("letter");
+const bgMusic = document.getElementById("bgMusic");
+
+const emojis = ["❤️","💖","💘","💝","💗","💓","💞","💋"];
+
+noBtn.addEventListener("mouseover", () => {
+  noBtn.style.left = Math.random() * 80 + "vw";
+  noBtn.style.top = Math.random() * 80 + "vh";
+});
+
+yesBtn.onclick = () => {
+  question.style.display = "none";
+  letter.style.display = "block";
+
+  // 🎵 Play full audio ONCE
+  bgMusic.currentTime = 0;
+  bgMusic.play();
+
+  setInterval(() => {
+    const e = document.createElement("div");
+    e.className = "fall";
+    e.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+    e.style.left = Math.random() * 100 + "vw";
+    e.style.animationDuration = (2 + Math.random() * 1.5) + "s";
+    document.body.appendChild(e);
+    setTimeout(() => e.remove(), 4000);
+  }, 120);
+};
+</script>
+
+</body>
+</html>
